@@ -22,7 +22,8 @@
             justify-content: center;
             gap: 15px;
             margin: 20px auto 30px;
-            max-width: 600px;
+            max-width: 800px;
+            flex-wrap: wrap;
         }
         .mode-btn, .ratio-btn {
             padding: 14px 28px;
@@ -57,6 +58,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             border-radius: 8px;
         }
+        .preview-grid-8 { grid-template-columns: 1fr 1fr 1fr 1fr; }
         .preview-grid-6 { grid-template-columns: 1fr 1fr 1fr; }
         .preview-grid-4 { grid-template-columns: 1fr 1fr; }
         .preview-grid-2 { grid-template-columns: 1fr 1fr; }
@@ -183,6 +185,7 @@
             display: grid;
             gap: 15px;
         }
+        #hiddenExportGrid.preview-grid-8 { grid-template-columns: 1fr 1fr 1fr 1fr; }
         #hiddenExportGrid.preview-grid-6 { grid-template-columns: 1fr 1fr 1fr; }
         #hiddenExportGrid.preview-grid-4 { grid-template-columns: 1fr 1fr; }
         #hiddenExportGrid.preview-grid-2 { grid-template-columns: 1fr 1fr; }
@@ -229,7 +232,8 @@
     <h1>📸 Tạo Bảng Báo Giá </h1>
     
     <div class="mode-selector">
-        <button class="mode-btn active" data-mode="6">Báo Giá 6 Ảnh</button>
+        <button class="mode-btn active" data-mode="8">Báo Giá 8 Ảnh</button>
+        <button class="mode-btn" data-mode="6">Báo Giá 6 Ảnh</button>
         <button class="mode-btn" data-mode="4">Báo Giá 4 Ảnh</button>
         <button class="mode-btn" data-mode="2">Báo Giá 2 Ảnh</button>
         <button class="mode-btn" data-mode="1">Báo Giá 1 Ảnh</button>
@@ -241,8 +245,44 @@
         <button class="ratio-btn" data-ratio="1/1">Tỷ lệ 1:1</button>
     </div>
 
-    <!-- ✅ THÊM KHUNG 6 ẢNH -->
-    <div class="preview-grid preview-grid-6 active" id="grid6">
+    <!-- ✅ THÊM KHUNG 8 ẢNH -->
+    <div class="preview-grid preview-grid-8 active" id="grid8">
+        <div class="preview-item" id="item8-1">
+            <span>Click hoặc kéo thả ảnh 1</span>
+            <input type="file" accept="image/*">
+        </div>
+        <div class="preview-item" id="item8-2">
+            <span>Click hoặc kéo thả ảnh 2</span>
+            <input type="file" accept="image/*">
+        </div>
+        <div class="preview-item" id="item8-3">
+            <span>Click hoặc kéo thả ảnh 3</span>
+            <input type="file" accept="image/*">
+        </div>
+        <div class="preview-item" id="item8-4">
+            <span>Click hoặc kéo thả ảnh 4</span>
+            <input type="file" accept="image/*">
+        </div>
+        <div class="preview-item" id="item8-5">
+            <span>Click hoặc kéo thả ảnh 5</span>
+            <input type="file" accept="image/*">
+        </div>
+        <div class="preview-item" id="item8-6">
+            <span>Click hoặc kéo thả ảnh 6</span>
+            <input type="file" accept="image/*">
+        </div>
+        <div class="preview-item" id="item8-7">
+            <span>Click hoặc kéo thả ảnh 7</span>
+            <input type="file" accept="image/*">
+        </div>
+        <div class="preview-item" id="item8-8">
+            <span>Click hoặc kéo thả ảnh 8</span>
+            <input type="file" accept="image/*">
+        </div>
+    </div>
+
+    <!-- ✅ KHUNG 6 ẢNH -->
+    <div class="preview-grid preview-grid-6" id="grid6">
         <div class="preview-item" id="item6-1">
             <span>Click hoặc kéo thả ảnh 1</span>
             <input type="file" accept="image/*">
@@ -326,7 +366,7 @@
                 <div id="hiddenExportSubtitle">Kính gởi: Quý Khách hàng - Đại lý</div>
             </div>
         </div>
-        <div id="hiddenExportGrid" class="preview-grid-6">
+        <div id="hiddenExportGrid" class="preview-grid-8">
             <!-- Sẽ được tạo động -->
         </div>
         <div id="hiddenExportFooter">CÔNG TY IDECO TRÂN TRỌNG</div>
@@ -334,12 +374,23 @@
     </div>
     <script>
         const grids = {
+            '8': document.getElementById('grid8'),
             '6': document.getElementById('grid6'),
             '4': document.getElementById('grid4'),
             '2': document.getElementById('grid2'),
             '1': document.getElementById('grid1')
         };
         const items = {
+            '8': [
+                document.getElementById('item8-1'),
+                document.getElementById('item8-2'),
+                document.getElementById('item8-3'),
+                document.getElementById('item8-4'),
+                document.getElementById('item8-5'),
+                document.getElementById('item8-6'),
+                document.getElementById('item8-7'),
+                document.getElementById('item8-8')
+            ],
             '6': [
                 document.getElementById('item6-1'),
                 document.getElementById('item6-2'),
@@ -373,9 +424,10 @@
         const hiddenExportBoard = document.getElementById('hiddenExportBoard');
         const hiddenExportGrid = document.getElementById('hiddenExportGrid');
         const modalExportBoard = document.getElementById('modalExportBoard');
-        let currentMode = '6'; // Mặc định là 6 ảnh
+        let currentMode = '8'; // Mặc định là 8 ảnh
         let currentRatio = '3/4';
         let imageSources = {
+            '8': [null, null, null, null, null, null, null, null],
             '6': [null, null, null, null, null, null],
             '4': [null, null, null, null],
             '2': [null, null],
@@ -600,5 +652,4 @@
         updateAllAspectRatios(currentRatio);
     </script>
 </body>
-
 </html>
